@@ -1,18 +1,23 @@
 import { useState } from 'react'
 
+const gifts = [
+  'CPU',
+  'IPHONE',
+  'MOTO'
+]
+
 function App() {
 
-  const [count, setCount] = useState(0)
+  const [gift, setGift] = useState()
 
   const handleButton = () =>{
-    setCount(prevState=> prevState+1)
-    setCount(prevState=> prevState+1)
+    setGift(gifts[Math.floor(Math.random()*gifts.length)])
   }
 
   return (
     <div className="App">
       <h1>Bai 1:</h1>
-      <p>{count}</p>
+      <h3>{gift||'Chua co phan thuong'}</h3>
       <button onClick={handleButton}>Click</button>
     </div>
   );
