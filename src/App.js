@@ -1,24 +1,27 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 
 function App() {
 
-  const [name, setName] = useState('')
-  console.log(name);
+  const [students, setStudents] = useState([])
+  // console.log(name);
   
-
-  const handleButton = () =>{
-    
-  }
+  useEffect(()=>{
+    fetch('http://127.0.0.1:8000/student/')
+      .then(res =>res.json())
+      .then(students=>{
+        setStudents(students)
+      })
+  },[])
 
   return (
     <div className="App">
       <h1>Bai 1:</h1>
-      <input 
-        value={name}
-        onChange={e=>setName(e.target.value)}
-      />
-      <button onClick={()=>setName("Tran Van Nghia")}>Click</button>
+        <ul>
+          {students.map(student=>(
+            <li key={student.id}>{student.name}</li>
+          ))}
+        </ul>
     </div>
   );
 }
